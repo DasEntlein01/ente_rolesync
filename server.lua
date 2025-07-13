@@ -92,10 +92,10 @@ end)
 
 -- Eigentlich unötig 
 
--- RegisterCommand("claimteamrole", function(source)
---     local playerId = source
---     updatePlayerGroup(playerId)
--- end, false)
+RegisterCommand("claimteamrole", function(source)
+    local playerId = source
+    updatePlayerGroup(playerId)
+end, false)
 
 
 
@@ -110,13 +110,13 @@ CreateThread(function()
 
     PerformHttpRequest("https://api.github.com/repos/DasEntlein01/ente_rolesync/releases/latest", function(statusCode, response, _)
         if statusCode ~= 200 then
-            print("^1[⚠️ u_notify] Failed to fetch the latest version from GitHub. Status Code: " .. statusCode .. "^0")
+            print("^1[⚠️] Failed to fetch the latest version from GitHub. Status Code: " .. statusCode .. "^0")
             return
         end
 
         local success, data = pcall(json.decode, response)
         if not success or not data or not data.tag_name then
-            print("^1[❌ u_notify] Failed to parse GitHub response.^0")
+            print("^1[❌] Failed to parse GitHub response.^0")
             return
         end
 
@@ -124,7 +124,7 @@ CreateThread(function()
 
         if localVersion ~= latestVersion then
             print("^3──────────────────────────────────────────────")
-            print("^3🔔 ^1u_notify Update Available!^3")
+            print("^3🔔 ^1ente_rolesync Update Available!^3")
             print("^3──────────────────────────────────────────────")
             print("^3📌 Current Version: ^0" .. localVersion)
             print("^3🚀 Latest Version: ^0" .. latestVersion)
@@ -132,7 +132,7 @@ CreateThread(function()
             print("^3──────────────────────────────────────────────")
         else
             print("^2──────────────────────────────────────────────")
-            print("^2✅ u_notify is up to date!")
+            print("^2✅ ente_rolesync is up to date!")
             print("^2📦 Version: " .. localVersion)
             print("^2──────────────────────────────────────────────")
         end
